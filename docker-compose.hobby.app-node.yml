@@ -1,0 +1,62 @@
+#
+# Override para la MÁQUINA DE APLICACIÓN cuando ClickHouse y Kafka corren en otra máquina
+# (ver docker-compose.hobby.data-node.yml).
+#
+# Los servicios `clickhouse`, `kafka` y `zookeeper` se sustituyen por proxies TCP minúsculos
+# (socat) que reenvían a la máquina de datos. Así todos los demás servicios siguen usando los
+# hostnames `clickhouse` y `kafka` sin cambiar nada más.
+#
+# Requiere Docker Compose >= 2.24.4 (tags !reset / !override).
+#
+# Uso:
+#   DATA_HOST=<ip-de-la-maquina-de-datos> docker compose \
+#     -f docker-compose.hobby.yml -f docker-compose.hobby.app-node.yml up -d
+#
+# Redpanda anuncia `kafka:9092`, que aquí resuelve al proxy, por lo que los clientes
+# vuelven a pasar por él sin problema.
+#
+
+services:
+    clickhouse:
+        image: alpine/socat:1.8.0.0
+        entrypoint: !override
+            - /bin/sh
+            - -c
+            - |
+                socat TCP-LISTEN:8123,fork,reuseaddr TCP:$${DATA_HOST}:8123 &
+                exec socat TCP-LISTEN:9000,fork,reuseaddr TCP:$${DATA_HOST}:9000
+        command: !reset null
+        environment: !override
+            DATA_HOST: ${DATA_HOST:?define DATA_HOST}
+        volumes: !reset []
+        depends_on: !reset []
+        healthcheck: !override
+            test: ['CMD-SHELL', 'nc -z localhost 8123 && nc -z $${DATA_HOST} 8123']
+            interval: 5s
+            timeout: 5s
+            retries: 12
+
+    kafka:
+        image: alpine/socat:1.8.0.0
+        entrypoint: !override
+            - /bin/sh
+            - -c
+            - exec socat TCP-LISTEN:9092,fork,reuseaddr TCP:$${DATA_HOST}:9092
+        command: !reset null
+        environment: !override
+            DATA_HOST: ${DATA_HOST:?define DATA_HOST}
+        ulimits: !reset null
+        volumes: !reset []
+        depends_on: !reset []
+        healthcheck: !override
+            test: ['CMD-SHELL', 'nc -z localhost 9092 && nc -z $${DATA_HOST} 9092']
+            interval: 5s
+            timeout: 5s
+            retries: 12
+
+    # Ya no hace falta localmente: ClickHouse (y su ZooKeeper) viven en la máquina de datos.
+    zookeeper:
+        profiles: ['remote-data-disabled']
+
+    # kafka-init se mantiene: otros servicios dependen de él. Es idempotente y habla con
+    # Redpanda a través del proxy `kafka`, así que simplemente re-verifica los topics.
