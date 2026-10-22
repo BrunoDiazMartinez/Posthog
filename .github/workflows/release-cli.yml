@@ -736,7 +736,7 @@ jobs:
                   sh "$installer"
             # Get the dist-manifest
             - name: Fetch local artifacts
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: artifacts-*
                   path: target/distrib/
@@ -875,14 +875,14 @@ jobs:
                   ref: ${{ needs.release.outputs.release-commit }}
                   submodules: recursive
             - name: Install cached dist
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: cargo-dist-cache
                   path: ~/.cargo/bin/
             - run: chmod +x ~/.cargo/bin/dist
             # Get all the local artifacts for the global tasks to use (for e.g. checksums)
             - name: Fetch local artifacts
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: artifacts-*
                   path: target/distrib/
@@ -955,14 +955,14 @@ jobs:
                   submodules: recursive
                   token: ${{ steps.app-token.outputs.token }}
             - name: Install cached dist
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: cargo-dist-cache
                   path: ~/.cargo/bin/
             - run: chmod +x ~/.cargo/bin/dist
             # Fetch artifacts from scratch-storage
             - name: Fetch artifacts
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: artifacts-*
                   path: target/distrib/
@@ -982,7 +982,7 @@ jobs:
                   path: dist-manifest.json
             # Create a GitHub Release while uploading all files to it
             - name: 'Download GitHub Artifacts'
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: artifacts-*
                   path: artifacts
@@ -1121,7 +1121,7 @@ jobs:
                   sparse-checkout: .nvmrc
                   sparse-checkout-cone-mode: false
             - name: Fetch npm packages
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: artifacts-*
                   path: npm/
@@ -1159,7 +1159,7 @@ jobs:
             # cargo-dist generates the formula complete with per-platform URLs and
             # checksums, so unlike the phrocs formula there is no template to fill.
             - name: Fetch the generated formula
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: artifacts-*
                   path: artifacts/
@@ -1216,7 +1216,7 @@ jobs:
               with:
                   toolchain: 1.91.1
             - name: Fetch release artifacts
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: artifacts-*
                   path: artifacts/
