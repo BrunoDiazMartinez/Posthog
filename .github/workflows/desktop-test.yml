@@ -230,7 +230,7 @@ jobs:
                   CI: true
 
             - name: Upload Playwright report
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               # Keys off the step outcome, not failure(): the test step is continue-on-error, so a
               # failing suite no longer reds the job on its own and failure() would never fire here.
               if: ${{ !cancelled() && steps.run-e2e.outcome == 'failure' }}
@@ -251,7 +251,7 @@ jobs:
                   CI: true
 
             - name: Upload web Playwright report
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: ${{ !cancelled() && steps.run-web-e2e.outcome == 'failure' }}
               with:
                   name: web-playwright-report

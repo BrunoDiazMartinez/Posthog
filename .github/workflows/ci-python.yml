@@ -507,7 +507,7 @@ jobs:
                         pytest bin/test/test_granian_shared_socket.py -v --junitxml=junit-granian-shared-socket.xml
 
             - name: Upload test results
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: always()
               with:
                   name: junit-results-hogli
@@ -521,7 +521,7 @@ jobs:
                       junit-pr-approval-agent-*.xml
 
             - name: Upload test results for dependency detection
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: always()
               with:
                   name: junit-results-dependency-detection
@@ -529,7 +529,7 @@ jobs:
                   path: junit-dependency-detection.xml
 
             - name: Upload test results for granian shared socket
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: always()
               with:
                   name: junit-results-granian-shared-socket
