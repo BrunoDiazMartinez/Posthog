@@ -963,7 +963,7 @@ jobs:
               # Same pinning as the Django job; falls back to the floating cache.
               id: pinned-plan
               continue-on-error: true
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: test-durations-plan
                   path: /tmp/test-durations-plan
@@ -2110,7 +2110,7 @@ jobs:
             contents: read
         steps:
             - name: Download migrated schema artifact
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: migrated-schema
 
@@ -3095,7 +3095,7 @@ jobs:
               # that step); a missing snapshot falls back to the floating caches above.
               id: pinned-plan
               continue-on-error: true
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: test-durations-plan
                   path: /tmp/test-durations-plan
@@ -3708,7 +3708,7 @@ jobs:
             - name: Download all snapshot patches
               id: download-patches
               continue-on-error: true
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: snapshot-patch-*
                   path: /tmp/snapshot-patches
@@ -3805,7 +3805,7 @@ jobs:
             - name: Download shard JUnit results
               if: always() && (needs.django.result != 'success' || needs.turbo-tests.result != 'success')
               continue-on-error: true
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: '{junit-results-backend,product-junit-results}-*'
                   path: /tmp/junit-gate/
@@ -3952,7 +3952,7 @@ jobs:
                   version: '0.11.28'
 
             - name: Download JUnit artifacts
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: junit-results-backend-*
                   path: /tmp/junit-results/
@@ -3979,7 +3979,7 @@ jobs:
             - name: Download selection artifact
               id: download-selection
               continue-on-error: true
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: select-tests-output
                   path: /tmp/verdict/
@@ -3988,7 +3988,7 @@ jobs:
               # The verdict reports selected seconds per segment from .test_durations,
               # which is not in the repo; use the union turbo-discover snapshotted.
               continue-on-error: true
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: test-durations-plan
                   path: .
@@ -4152,7 +4152,7 @@ jobs:
                   version: '0.11.28' # pinned: unpinned setup-uv calls GH API on every job, exhausts rate limit
             - name: Download junit artifacts
               if: steps.timing-reporter.outputs.available == 'true'
-              uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v6.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v6.0.0
               with:
                   path: ./junit-artifacts
                   pattern: '{junit-results-backend,product-junit-results}-*'
@@ -4216,14 +4216,14 @@ jobs:
             - name: Download coverage artifacts
               if: steps.reporter.outputs.available == 'true'
               continue-on-error: true # a run where no shard emitted coverage.xml is not a failure
-              uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v6.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v6.0.0
               with:
                   path: ./cov-artifacts
                   pattern: coverage-xml-*
             - name: Download core coverage artifacts
               if: steps.reporter.outputs.available == 'true'
               continue-on-error: true # core coverage only present once the Core segment ran with --cov
-              uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v6.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v6.0.0
               with:
                   path: ./core-artifacts
                   pattern: coverage-core-*

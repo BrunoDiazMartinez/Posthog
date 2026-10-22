@@ -696,13 +696,13 @@ jobs:
               run: npm install --prefix products/desktop/apps/code yaml@^2
 
             - name: Download arm64 mac manifest
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: mac-manifest-arm64
                   path: /tmp/mac-manifests/arm64
 
             - name: Download x64 mac manifest
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: mac-manifest-x64
                   path: /tmp/mac-manifests/x64
@@ -722,7 +722,7 @@ jobs:
                   gh release upload "desktop-v$APP_VERSION" --repo "$GITHUB_REPOSITORY" --clobber /tmp/latest-mac.yml
 
             - name: Download checksum artifacts
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   pattern: checksums-*
                   merge-multiple: true
@@ -740,7 +740,7 @@ jobs:
                     --title "desktop-v$APP_VERSION" --notes-file /tmp/release-notes.md
 
             - name: Download windows manifest
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
               with:
                   name: win-manifest
                   path: /tmp/win-manifest

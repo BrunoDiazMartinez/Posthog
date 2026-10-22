@@ -465,7 +465,7 @@ jobs:
 
             - name: Download result
               id: dl
-              uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v6.0.0
+              uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v6.0.0
               continue-on-error: true # a PR the resolve job skipped has no artifact
               with:
                   name: result-${{ matrix.pr.number }}
