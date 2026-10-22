@@ -320,7 +320,7 @@ jobs:
                   key: storybook-vite-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
             - name: Upload Storybook build artifact
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: storybook-build
                   path: common/storybook/dist
@@ -336,7 +336,7 @@ jobs:
             # than the build and the whole visual-regression matrix behind it.
             - name: Upload module-graph artifact
               continue-on-error: true
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: storybook-module-graph
                   path: common/storybook/dist/module-graph.json
@@ -345,7 +345,7 @@ jobs:
 
             # Consumed by check-baseline-removals, which needs only the story index.
             - name: Upload story index artifact
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: storybook-index
                   path: common/storybook/dist/index.json
@@ -877,7 +877,7 @@ jobs:
             - name: Upload test results
               if: always()
               continue-on-error: true
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: junit-results-storybook-${{ matrix.browser }}-${{ matrix.shard }}
                   path: common/storybook/junit.xml
@@ -1015,7 +1015,7 @@ jobs:
 
             - name: Upload flake verification screenshots
               if: failure() && steps.flake-verify.outcome == 'failure'
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: flake-verification-diffs
                   path: |

@@ -985,7 +985,7 @@ jobs:
               if: always()
               # The quarantine gate reads the local JUnit files, so an artifact service failure must not change the test verdict.
               continue-on-error: true
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   # Keep attempt 1's artifact available so the reporter can identify same-job
                   # failures that pass when GitHub re-runs failed jobs on the same commit.
@@ -1062,7 +1062,7 @@ jobs:
 
             - name: Upload test results
               if: always()
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: junit-results-replay-shared
                   path: junit-results/junit-*.xml

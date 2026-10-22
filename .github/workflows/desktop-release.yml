@@ -244,7 +244,7 @@ jobs:
               run: pnpm --filter code exec playwright test --config=tests/e2e/playwright.config.ts
 
             - name: Upload Playwright report
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: failure() && matrix.arch == 'arm64'
               with:
                   name: release-playwright-report-macos-${{ matrix.arch }}
@@ -253,7 +253,7 @@ jobs:
 
             - name: Upload the x64 app for the native Intel e2e run
               if: matrix.arch == 'x64'
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: e2e-app-macos-x64
                   path: products/desktop/apps/code/out/*-mac.zip
@@ -298,14 +298,14 @@ jobs:
               run: shasum -a 256 *.dmg *-mac.zip *.blockmap > "checksums-macos-$MATRIX_ARCH.txt"
 
             - name: Upload checksums artifact
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: checksums-macos-${{ matrix.arch }}
                   path: products/desktop/apps/code/out/checksums-macos-${{ matrix.arch }}.txt
                   retention-days: 1
 
             - name: Upload mac manifest artifact
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: mac-manifest-${{ matrix.arch }}
                   path: products/desktop/apps/code/out/latest-mac.yml
@@ -374,7 +374,7 @@ jobs:
               run: pnpm --filter code exec playwright test --config=tests/e2e/playwright.config.ts
 
             - name: Upload Playwright report
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: failure()
               with:
                   name: release-playwright-report-macos-x64
@@ -539,7 +539,7 @@ jobs:
                   }
 
             - name: Upload windows manifest artifact
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: win-manifest
                   path: products/desktop/apps/code/out/latest.yml
@@ -553,7 +553,7 @@ jobs:
               run: sha256sum *.exe *.blockmap > checksums-windows-x64.txt
 
             - name: Upload checksums artifact
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: checksums-windows-x64
                   path: products/desktop/apps/code/out/checksums-windows-x64.txt
@@ -724,7 +724,7 @@ jobs:
               run: sha256sum *.AppImage *.deb *.rpm > "checksums-linux-$MATRIX_ARCH.txt"
 
             - name: Upload checksums artifact
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: checksums-linux-${{ matrix.arch }}
                   path: products/desktop/apps/code/out/checksums-linux-${{ matrix.arch }}.txt

@@ -759,7 +759,7 @@ jobs:
               # identically. Best-effort (consumers fall back to the floating caches);
               # overwrite lets a "re-run all jobs" attempt re-snapshot.
               continue-on-error: true
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: test-durations-plan
                   path: |
@@ -845,7 +845,7 @@ jobs:
               # upload failure must not fail this job; the verdict regenerates the selection.
               continue-on-error: true
               if: always() && steps.select.outcome == 'success'
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: select-tests-output
                   path: /tmp/selection.json
@@ -1293,7 +1293,7 @@ jobs:
             # product JUnit by download pattern; the product name rides in each inner filename
             # (junit-product-<name>.xml). The failure rollup and timing reporter consume both.
             - name: Upload product test results
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: always()
               with:
                   name: product-junit-results-${{ strategy.job-index }}
@@ -1302,7 +1302,7 @@ jobs:
                   overwrite: true # artifacts are immutable per run; re-run shards would 409 otherwise
 
             - name: Upload timing data
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               # Only the legacy-schema variant uploads durations — both schema variants run the
               # same test IDs, and two artifacts for the same tests would race in the merge.
               # A job whose products have no backend tests writes no JUnit, so it has no fresh
@@ -1330,7 +1330,7 @@ jobs:
                   done
 
             - name: Upload product coverage
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               # always(): a failing test shard still has partial coverage worth reporting.
               if: ${{ always() && github.event_name == 'pull_request' }}
               with:
@@ -1374,7 +1374,7 @@ jobs:
 
             - name: Upload snapshot patch
               if: ${{ always() && needs.detect-snapshot-mode.outputs.mode == 'update' && github.event.pull_request.head.repo.full_name == 'PostHog/posthog' }}
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: snapshot-patch-Products-${{ strategy.job-index }}
                   path: /tmp/patches/
@@ -2138,7 +2138,7 @@ jobs:
 
             - name: Upload migration analysis artifact
               if: always() && github.event_name == 'pull_request'
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: migration-analysis
                   path: |
@@ -2196,7 +2196,7 @@ jobs:
 
             - name: Upload migrated schema artifact
               if: github.event_name == 'push'
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: migrated-schema
                   path: schema.sql.gz
@@ -3740,7 +3740,7 @@ jobs:
                   fi
 
             - name: Upload core coverage
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: ${{ always() && github.event_name == 'pull_request' && needs.turbo-discover.outputs.mode != 'selected' && matrix.segment == 'Core' && !matrix.json-targets }}
               with:
                   name: coverage-core-${{ strategy.job-index }}
@@ -3894,7 +3894,7 @@ jobs:
               run: docker compose -f docker-compose.dev.yml logs
 
             - name: Upload updated timing data as artifacts
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               # Upload on master, or on PRs that change timing/sharding scripts (for validation)
               if: ${{ (github.ref == 'refs/heads/master' || needs.changes.outputs.timing_scripts == 'true') && needs.changes.outputs.backend == 'true' && !matrix.person-on-events && !matrix.new-events-schema && matrix.clickhouse-server-image == needs.get_clickhouse_versions.outputs.oldest_supported_image }}
               with:
@@ -3944,7 +3944,7 @@ jobs:
             - name: Upload snapshot patch
               # Only in UPDATE mode
               if: ${{ needs.detect-snapshot-mode.outputs.mode == 'update' && github.event.pull_request.head.repo.full_name == 'PostHog/posthog' && needs.changes.outputs.backend == 'true' && !matrix.person-on-events && !matrix.compat && steps.run-core-tests.outcome != 'failure' && steps.run-temporal-tests.outcome != 'failure' }}
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: snapshot-patch-${{ matrix.artifact_key }}
                   path: /tmp/patches/
@@ -3952,14 +3952,14 @@ jobs:
                   retention-days: 1
 
             - name: Archive email renders
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: needs.changes.outputs.backend == 'true' && matrix.segment == 'Core' && !matrix.person-on-events && !matrix.new-events-schema && !matrix.compat
               with:
                   name: email_renders-${{ github.sha }}-${{ github.run_attempt }}-${{ matrix.segment }}-${{ matrix.person-on-events }}-${{ matrix.group }}
                   path: posthog/tasks/test/__emails__
                   retention-days: 1
             - name: Upload test results
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               if: always()
               with:
                   # Re-run attempts suffix the name: a same-name upload supersedes attempt 1's
@@ -4488,7 +4488,7 @@ jobs:
 
             - name: Upload verdict
               if: always()
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: test-selection-verdict-pr${{ github.event.pull_request.number }}
                   path: /tmp/verdict/
@@ -4730,7 +4730,7 @@ jobs:
                   fi
             - name: Upload patch coverage payload
               if: ${{ always() && steps.reporter.outputs.available == 'true' }}
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
               with:
                   name: patch-coverage
                   path: |
